@@ -1,0 +1,38 @@
+# import random
+
+def str_xor(secret, key):
+    #extend key to secret length
+    new_key = list(key) # Convert key to a list
+    i = 0
+    while len(new_key) < len(secret):
+        # new_key = new_key + key[i]
+        new_key.append(key[i])
+        i = (i + 1) % len(key)
+
+    # Convert back to string
+    new_key = "".join(new_key)
+
+    # Perform XOR and return the result
+    # return "".join([chr(ord(secret_c) ^ ord(new_key_c)) for (secret_c,new_key_c) in zip(secret,new_key)])
+    return "".join(chr(ord(a) ^ ord(b)) for a, b in zip(secret, new_key))
+
+
+# flag_enc = chr(0x15) + chr(0x07) + chr(0x08) + chr(0x06) + chr(0x27) + chr(0x21) + chr(0x23) + chr(0x15) + chr(0x58) + chr(0x18) + chr(0x11) + chr(0x41) + chr(0x09) + chr(0x5f) + chr(0x1f) + chr(0x10) + chr(0x3b) + chr(0x1b) + chr(0x55) + chr(0x1a) + chr(0x34) + chr(0x5d) + chr(0x51) + chr(0x40) + chr(0x54) + chr(0x09) + chr(0x05) + chr(0x04) + chr(0x57) + chr(0x1b) + chr(0x11) + chr(0x31) + chr(0x5f) + chr(0x51) + chr(0x52) + chr(0x46) + chr(0x00) + chr(0x5f) + chr(0x5a) + chr(0x0b) + chr(0x19)
+flag_enc = "".join(chr(x) for x in [
+    0x15, 0x07, 0x08, 0x06, 0x27, 0x21, 0x23, 0x15, 0x58, 0x18, 0x11, 0x41,
+    0x09, 0x5f, 0x1f, 0x10, 0x3b, 0x1b, 0x55, 0x1a, 0x34, 0x5d, 0x51, 0x40,
+    0x54, 0x09, 0x05, 0x04, 0x57, 0x1b, 0x11, 0x31, 0x5f, 0x51, 0x52, 0x46,
+    0x00, 0x5f, 0x5a, 0x0b, 0x19
+])
+
+  
+flag = str_xor(flag_enc, 'enkidu')
+
+# Check that flag is not empty
+if flag == "":
+  print("String XOR encountered a problem, quitting.")
+else:
+  # print('That is correct! Here\'s your flag: ' + flag)
+  print("That is correct! Here's your flag:" + flag)
+
+

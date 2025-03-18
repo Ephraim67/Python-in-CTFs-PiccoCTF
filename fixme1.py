@@ -1,7 +1,5 @@
 import random
 
-
-
 def str_xor(secret, key):
     #extended key to match Lenght efficiently
     new_key = list(key)
